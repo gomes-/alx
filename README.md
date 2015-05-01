@@ -6,10 +6,10 @@ $ git clone git://github.com/gomes-/alx.git
 
 # Dependencies
 
-*Python3
+* Python3
 
 ##For Windows
-*Unix Tools for Windows
+* Unix Tools for Windows
 
 
 # License
