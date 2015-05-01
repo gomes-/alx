@@ -2,7 +2,7 @@
 Swiss army knife for Shell, Cloud and DevOps in Python
 
 # Install
-$ git clone https://github.com/gomes-/alx
+$ git clone git://github.com/gomes-/alx.git
 
 # Dependencies
 
