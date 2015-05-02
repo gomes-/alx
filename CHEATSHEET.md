@@ -25,6 +25,7 @@ $ alx do -n connect2
 
 ##### Execute last command
 $ alx do last
+$ alx do
 
 ## flush
 ##### Remove command
