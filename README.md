@@ -1,20 +1,20 @@
 # alx
 Swiss army knife for Shell, Cloud and DevOps in Python
 
-# How To
+## How To
 
 Check out the [CheatSheet](CHEATSHEET.md)
 
-# Install
+## Install
 $ git clone git://github.com/gomes-/alx.git
 
-# Dependencies
+## Dependencies
 
 * Python3
 
-##For Windows
+### For Windows
 * Unix Tools for Windows
 
 
-# License
+## License
 Licensed under GPL, Version 3.0
