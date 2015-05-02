@@ -8,12 +8,12 @@ Check out the [CheatSheet](CHEATSHEET.md)
 ## Install
 $ git clone git://github.com/gomes-/alx.git
 
-## Dependencies
+### Dependencies
 
-* Python3
+* (required) Python3 
 
-### For Windows
-* Unix Tools for Windows
+#### For Windows
+* (optional) Unix Tools for Windows
 
 
 ## License
