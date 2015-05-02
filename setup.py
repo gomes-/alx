@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/gomes-/alx',
     license='GPLv3+',
     author='Alex Gomes',
@@ -29,7 +29,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: System :: Distributed Computing',
-        'Topic :: System :: Networking '
+        'Topic :: System :: Networking ',
         'Topic :: System :: Shells',
         'Topic :: System :: Systems Administration',
         ],

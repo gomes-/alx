@@ -6,7 +6,24 @@ Swiss army knife for Shell, Cloud and DevOps in Python
 Check out the [CheatSheet](CHEATSHEET.md)
 
 ## Install
+
+#### Linux
+$ sudo pip install alx
+
+#### Windows
+$ pip install alx
+
+#### Developer
 $ git clone git://github.com/gomes-/alx.git
+
+## Run
+
+#### Linux
+/usr/local/bin/alx arg1 [arg2] [options]
+
+#### Windows
+python alx arg1 [arg2] [options]
+
 
 ### Dependencies
 
