@@ -1,0 +1,4 @@
+include CHEATSHEET.md
+include README.md
+recursive-include bin *
+recursive-exclude test *

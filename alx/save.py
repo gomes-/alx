@@ -33,11 +33,8 @@ class Save:
                 my_data.alx_save["last"] = cmd
 
             Save.io.export_data(my_data.alx_save)
-
-
         except:
             raise ()
-
 
     def get_cmd(self, name):
         try:
@@ -48,12 +45,14 @@ class Save:
 
         return None
 
+
     #Run
     def run_cmd(self, cmd):
         try:
             subprocess.call(cmd, shell=True)
         except:
             raise ()
+
 
     #Flush
     def flush_cmd(self, name):
@@ -64,7 +63,6 @@ class Save:
             Save.io.export_data(my_data.alx_save)
         except:
             raise ()
-
 
     def flush_all(self):
         try:

@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.1.0"
+_version = "0.2.0"
 __author__ = 'Alex Gomes'
 
 msg_help = """
@@ -112,7 +112,7 @@ def main():
 def choice(options, args):
     global msg_default, msg_err_arg
 
-    # Save
+    #save
     if str(args[0]).lower() == "save":
         if len(args) == 2:
             import alx.save
@@ -122,7 +122,7 @@ def choice(options, args):
         else:
             parser.error(msg_err_arg)
 
-    #Run
+    #run
     elif str(args[0]).lower() == "run":
         import alx.save
 
@@ -148,7 +148,7 @@ def choice(options, args):
             print("Command not available")
 
 
-    #Flush
+    #flush
     elif str(args[0]).lower() == "flush":
         import alx.save
 
