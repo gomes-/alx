@@ -12,6 +12,7 @@ $ alx do last
 
 #### Remove command
 $ alx flush connect
+
 $ alx flush -n connect
 #### Remove all command
 $ alx flush
