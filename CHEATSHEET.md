@@ -1,31 +1,36 @@
 # CheatSheet
 
-#### Save a command with name
+## save
+##### Command with name
 $ alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net' -n connect1
 
 $ alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net' -n connect2
 
-##### Save a command as 'last'
+##### Command as 'last'
 $ alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net'
 
-#### Save & Run command
+
+# run
+##### Save & Run command
 $ alx run 'ssh -i azure.pem ubuntu@ubuntu2.cloudapp.net' -n connect3
 
 $ alx run 'ssh -i azure.pem ubuntu@ubuntu2.cloudapp.net'
 
 
-#### Execute saved command
+## do
+##### Execute saved command
 $ alx do connect
 
 $ alx do -n connect2
 
-#### Execute last command
+##### Execute last command
 $ alx do last
 
-#### Remove command
+## flush
+##### Remove command
 $ alx flush connect
 
 $ alx flush -n connect
 
-#### Remove all command
+##### Remove all command
 $ alx flush
