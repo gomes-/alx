@@ -1,5 +1,6 @@
 # Save
 alx save 'touch test1.txt' -n test1
+alx save 'touch test1.txt'
 
 # Run
 alx run 'touch test2.txt' -n test2

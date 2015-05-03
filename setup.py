@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.2.2',
+    version='0.2.4',
     url='https://github.com/gomes-/alx',
     license='GPLv3+',
     author='Alex Gomes',
@@ -13,7 +13,9 @@ setup(
              'bin/alx.bat',
              'bin/alx',
              ],
-    packages=['alx', 'alx.data'],
+    packages=['alxlib',
+              'alxlib.data',
+              ],
 
 
     classifiers=[

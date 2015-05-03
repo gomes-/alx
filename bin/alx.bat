@@ -1,3 +1,3 @@
 @echo off
 
-python alx.py %*
+python %~dp0/alx.py %*

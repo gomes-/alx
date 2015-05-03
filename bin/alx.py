@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.2.2"
+_version = "0.2.4"
 __author__ = 'Alex Gomes'
 
 msg_help = """
@@ -45,9 +45,9 @@ from optparse import OptionParser
 path_file = os.path.abspath(__file__)
 dir_path = os.path.dirname(path_file)
 dir_top = os.path.split(dir_path)[0]
-dir_alx = os.path.join(dir_top, 'alx')
+dir_alxlib = os.path.join(dir_top, 'alxlib')
 
-if os.path.isdir(dir_alx):
+if os.path.isdir(dir_alxlib):
     sys.path.insert(0, dir_top)
 
 import alx
@@ -115,27 +115,27 @@ def choice(options, args):
     #save
     if str(args[0]).lower() == "save":
         if len(args) == 2:
-            import alx.save
+            import alxlib.save
 
-            save = alx.save.Save()
+            save = alxlib.save.Save()
             save.set_cmd(options.name, args[1])
         else:
             parser.error(msg_err_arg)
 
     #run
     elif str(args[0]).lower() == "run":
-        import alx.save
+        import alxlib.save
 
-        save = alx.save.Save()
+        save = alxlib.save.Save()
 
         save.set_cmd(options.name, args[1])
         save.run_cmd(args[1])
 
     #do
     elif str(args[0]).lower() == "do":
-        import alx.save
+        import alxlib.save
 
-        save = alx.save.Save()
+        save = alxlib.save.Save()
 
         if len(args) == 2:
             cmd = save.get_cmd(args[1])
@@ -150,9 +150,9 @@ def choice(options, args):
 
     #flush
     elif str(args[0]).lower() == "flush":
-        import alx.save
+        import alxlib.save
 
-        save = alx.save.Save()
+        save = alxlib.save.Save()
 
         if len(args) == 2:
             save.flush_cmd(args[1])

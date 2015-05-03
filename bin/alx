@@ -1,2 +1,3 @@
 #!/bin/sh
-python3 alx.py "$@"
+DIR=$(dirname "$0" )
+python3 "$DIR"/alx.py "$@"
