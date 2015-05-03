@@ -2,14 +2,17 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.2.1',
+    version='0.2.2',
     url='https://github.com/gomes-/alx',
     license='GPLv3+',
     author='Alex Gomes',
     author_email='gomes@alexgomes.com',
     description='Swiss army knife for Shell, Cloud and DevOps.',
 
-    scripts=['bin/alx'],
+    scripts=['bin/alx.py',
+             'bin/alx.bat',
+             'bin/alx',
+             ],
     packages=['alx', 'alx.data'],
 
 

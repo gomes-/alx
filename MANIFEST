@@ -7,3 +7,5 @@ alx\save.py
 alx\data\__init__.py
 alx\data\io.py
 bin\alx
+bin\alx.bat
+bin\alx.py
