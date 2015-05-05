@@ -5,26 +5,24 @@ __author__ = 'Alex Gomes'
 import os
 import errno
 import pprint
-
+import alxlib.data
 
 class IO:
     """ Class to store alx data
     """
-    path = ".alx"
-    file = "my_data.py"
 
     alx_header = """''' ALX data
     \n'''"""
 
-    alx_version = "0.1.0"
+    alx_version = "0.2.0"
 
 
     def path_data_dir(self):
-        return os.path.join(os.sep, os.path.expanduser('~'), IO.path)
+        return os.path.join(os.sep, os.path.expanduser('~'), alxlib.data.my_path)
 
 
     def path_data_file(self):
-        return os.path.join(os.sep, self.path_data_dir(), IO.file)
+        return os.path.join(os.sep, self.path_data_dir(), alxlib.data.my_data)
 
 
     def data_check(self):
@@ -37,8 +35,7 @@ class IO:
             filePath = self.path_data_file()
 
             if not os.path.isfile(filePath):
-                save = {}
-                self.export_data(save);
+                self.export_data({}, {})
 
             return dirPath
 
@@ -61,9 +58,10 @@ class IO:
                 raise ()
 
 
-    def export_data(self, save):
+    def export_data(self, alx_data, alx_save):
         data = (IO.alx_header + "\n"
                                 "alx_version = " + pprint.pformat(IO.alx_version) + "\n" +
-                "alx_save = " + pprint.pformat(save) + "\n")
+                "alx_data = " + pprint.pformat(alx_data) + "\n"
+                "alx_save = " + pprint.pformat(alx_save) + "\n")
 
         self.write_data(data)

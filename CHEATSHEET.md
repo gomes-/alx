@@ -28,6 +28,16 @@ $ alx do last
 
 $ alx do
 
+
+## list
+##### Remove command
+$ alx list connect
+
+$ alx list -n connect
+
+##### List all command
+$ alx list
+
 ## flush
 ##### Remove command
 $ alx flush connect
@@ -36,3 +46,8 @@ $ alx flush -n connect
 
 ##### Remove all command
 $ alx flush
+
+# Cloud
+#### Set keydir to alxkey.py
+#### download https://github.com/gomes-/alx/blob/master/alexkey.py
+$ alx keydir /path/to/file/

@@ -12,7 +12,7 @@ Check out cheat sheet https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
 
 #### Linux
 
-$ sudo pip install alx
+$ sudo pip3 install alx
 
 #### Windows
 
@@ -27,7 +27,7 @@ $ git clone git://github.com/gomes-/alx.git
 $ alx arg1 [arg2] [options]
 
 
-### Dependencies
+## Dependencies
 
 * (required) Python3 
 
@@ -35,7 +35,3 @@ $ alx arg1 [arg2] [options]
 
 * (optional) Unix Tools for Windows
 
-
-## License
-
-Licensed under GPL, Version 3.0

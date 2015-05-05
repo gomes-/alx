@@ -16,3 +16,7 @@ alx flush test1
 alx flush -n test2
 alx flush
 
+
+#AWS
+# Key
+alx keydir /full/usr/dir/

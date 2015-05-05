@@ -5,33 +5,34 @@
 **
 **  Author: Alex Gomes
 **  Download: https://github.com/gomes-/alx
-**  Copyright: GPL v3.0
+**  Copyright: All Rights Reserved. 2015
 """
 
 debug = False
-_version = "0.2.4"
+_version = "0.4.0"
 __author__ = 'Alex Gomes'
 
-msg_help = """
+_msg_help = """
 Examples:
 
     # Save a command
-    alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net' -n connect
-    alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net'
+    alx save 'ssh -i azure.key ubuntu@ubuntu.cloudapp.net' -n connect
+    alx save 'ssh -i azure.key ubuntu@ubuntu2.cloudapp.net'
 
     # Save & Run command
-    alx run 'ssh -i azure.pem ubuntu@ubuntu2.cloudapp.net' -n connect2
-    alx run 'ssh -i azure.pem ubuntu@ubuntu2.cloudapp.net'
+    alx run 'ssh -i azure.key ubuntu@ubuntu3.cloudapp.net' -n connect3
+    alx run 'ssh -i azure.key ubuntu@ubuntu4.cloudapp.net'
 
     # Execute saved command
     alx do connect
+    alx do -n connect
     # Execute last command
     alx do last
     alx do
 
     # Remove command
     alx flush connect
-    # Remove all command
+    # Remove all
     alx flush
 
    more at https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
@@ -41,6 +42,7 @@ import sys
 import os
 import logging
 from optparse import OptionParser
+from gettext import gettext as _
 
 path_file = os.path.abspath(__file__)
 dir_path = os.path.dirname(path_file)
@@ -50,18 +52,17 @@ dir_alxlib = os.path.join(dir_top, 'alxlib')
 if os.path.isdir(dir_alxlib):
     sys.path.insert(0, dir_top)
 
-import alx
+import alxlib
+import alxlib.help.msg as msg
 
 
-msg_default = "This feature has not been implemented yet"
-msg_err_arg = "Error: Incorrect number of arguments"
 
 if debug:
     logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 else:
     logging.basicConfig(level=logging.CRITICAL, format=' %(asctime)s - %(levelname)s - %(message)s')
 
-parser = OptionParser("usage: %prog arg1 [arg2] [options]", version=_version)
+_parser = OptionParser("usage: alx <{save|run|do|list|flush}> [arg2] [options]", version=_version)
 
 
 def help_info():
@@ -69,48 +70,53 @@ def help_info():
     :return:none
     """
 
-    global parser, msg_help
-    parser.print_help()
-    print(msg_help)
+    global _parser, _msg_help
+    print(_(_msg_help))
 
 
 def main():
     """Entry point of the code
     """
-    global debug, parser, msg_default, msg_err_arg
+    #import alxlib.help.msg as msg
+    global debug, _parser
+    #msg.default, msg.err_arg
 
     if '-h' in sys.argv or '--help' in sys.argv:
-        print(msg_default)
+        print(_(msg.default))
 
     # parser.add_option("-f", "--file", dest="filename",
     #                  help="write report to FILE", metavar="FILE")
 
-    parser.add_option("-n", "--name",
+    _parser.add_option("-n", "--name",
                       action="store", dest="name", default="last",
                       help="The 'name', to save your command, default='last'")
     #ToDo
-    '''parser.add_option("-v", "--verbose",
+    _parser.add_option("-v", "--verbose",
                       action="store_true", dest="verbose", default=True,
                       help="Print status messages to stdout")
-    parser.add_option("-q", "--quiet",
+    _parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=False,
-                      help="Don't print status messages to stdout")'''
+                      help="Don't print status messages to stdout")
 
-    (options, args) = parser.parse_args()
+    (options, args) = _parser.parse_args()
     logging.debug("options:{0}, args:{1}".format(options, args))
 
     if len(args) > 0:
         choice(options, args)
     else:
-        print("\n{0}\n".format(msg_err_arg))
+        _parser.print_help()
         help_info()
+        print(_(msg.err_arg))
+
+
+
 
     """if debug:
         input("\nPress any key to exit ...")"""
 
 
 def choice(options, args):
-    global msg_default, msg_err_arg
+    #global msg.default, msg.err_arg, msg.err_cmd
 
     #save
     if str(args[0]).lower() == "save":
@@ -120,16 +126,20 @@ def choice(options, args):
             save = alxlib.save.Save()
             save.set_cmd(options.name, args[1])
         else:
-            parser.error(msg_err_arg)
+            _parser.print_help()
+            _parser.error(_(msg.err_arg))
 
     #run
     elif str(args[0]).lower() == "run":
-        import alxlib.save
+        if len(args) == 2:
+            import alxlib.save
 
-        save = alxlib.save.Save()
-
-        save.set_cmd(options.name, args[1])
-        save.run_cmd(args[1])
+            save = alxlib.save.Save()
+            save.set_cmd(options.name, args[1])
+            save.run_cmd(args[1], options.verbose)
+        else:
+            _parser.print_help()
+            _parser.error(_(msg.err_arg))
 
     #do
     elif str(args[0]).lower() == "do":
@@ -143,10 +153,22 @@ def choice(options, args):
             cmd = save.get_cmd(options.name)
 
         if cmd is not None:
-            save.run_cmd(cmd)
+            save.run_cmd(cmd, options.verbose)
         else:
-            print("Command not available")
+            _parser.error(_(msg.err_cmd +(": "+ args[1]) if (len(args) == 2) else ""))
 
+    #list
+    elif str(args[0]).lower() == "list":
+        import alxlib.save
+
+        save = alxlib.save.Save()
+
+        if len(args) == 2:
+            save.list_cmd(args[1], _(msg.no_list))
+        elif options.name.lower() != "last":
+            save.list_cmd(options.name, _(msg.no_list))
+        else:
+            save.list_all(_(msg.no_list))
 
     #flush
     elif str(args[0]).lower() == "flush":
@@ -157,14 +179,28 @@ def choice(options, args):
         if len(args) == 2:
             save.flush_cmd(args[1])
         elif options.name.lower() != "last":
-            save.flush_cmd(options.name);
+            save.flush_cmd(options.name)
         else:
             save.flush_all()
+    #aws
+    elif str(args[0]).lower() == "keydir":
+        if len(args) == 2:
+            import alxlib.save, alxlib.data
+            save = alxlib.save.Save()
+            save.set_data(alxlib.data.key_dir, args[1])
+        else:
+            _parser.print_help()
+            _parser.error(_(msg.err_arg))
+    else:
+        _parser.print_help()
+        help_info()
+        print(_(msg.err_na_arg))
+
 
 
 if __name__ == "__main__":
     if sys.version_info[0] < 3:
-        print('Please install Python version 3+ \n for linux: sudo apt-get install python')
+        print(_(msg.err_py))
         exit()
     else:
         main()
