@@ -12,6 +12,7 @@ setup(
     scripts=['bin/alx.py',
              'bin/alx.bat',
              'bin/alx',
+             'bin/alx-server.py',
              ],
     packages=['alxlib',
               'alxlib.cloud',
@@ -20,7 +21,8 @@ setup(
               'alxlib.help',
               ],
     install_requires = ['python-daemon>=2.0.0',
-                        'boto3>=0.0.15',
+                        'boto>=2.35.0',
+                        'requests>=2.7.0'
                         ],
 
     classifiers=[

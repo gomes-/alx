@@ -8,8 +8,8 @@
 **  Copyright: All Rights Reserved. 2015
 """
 
-debug = False
-_version = "0.4.0"
+debug = True
+_version = "0.4.1"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -22,7 +22,7 @@ Key not set
 
 $ alx keydir /path/to/file/dir
 
-5) Run alx-daemon.py
+5) Run alx-server.py
 """
 
 
@@ -34,8 +34,6 @@ $ alx keydir /path/to/file/dir
 #standard python libs
 import logging, time
 import os, sys
-import daemon
-from daemon import runner
 from gettext import gettext as _
 
 path_file = os.path.abspath(__file__)
@@ -49,20 +47,47 @@ if os.path.isdir(dir_alxlib):
 import alxlib.key
 
 
+if debug:
+    logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
+else:
+    logging.basicConfig(level=logging.INFO, format=' %(asctime)s - %(levelname)s - %(message)s')
+
+
 def check_key():
     key = alxlib.key.Key()
-    if key.exist() == True:
-        print("daemon running .......")
+    if key.exist():
         return True
     else:
         print(_msg_help)
         return False
-    return False
+
+def run():
+    import alxlib.cloud.aws
+    aws = alxlib.cloud.aws.AWS()
+
+    if aws.connect_sqs()== None:
+        logging.critical("AWS connection failure, daemon will not run")
+        exit()
+    else:
+        logging.info("alx-server running ...")
+        aws.server_run()
+
+def run_linux():
+    import daemon
+    from daemon import runner
+
+    with daemon.DaemonContext():
+        run()
 
 
-if check_key() == True:
-    #with daemon.DaemonContext():
-    pass
+if check_key():
+    import platform
+    if platform.system().lower()=="windows":
+        run()
+    else:
+        run_linux()
+
+
 
 """
 class App():

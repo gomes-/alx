@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.0"
+_version = "0.4.1"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -38,8 +38,7 @@ Examples:
    more at https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
 """
 
-import sys
-import os
+import sys, os, time
 import logging
 from optparse import OptionParser
 from gettext import gettext as _
@@ -54,7 +53,6 @@ if os.path.isdir(dir_alxlib):
 
 import alxlib
 import alxlib.help.msg as msg
-
 
 
 if debug:
@@ -77,26 +75,32 @@ def help_info():
 def main():
     """Entry point of the code
     """
-    #import alxlib.help.msg as msg
+    # import alxlib.help.msg as msg
     global debug, _parser
     #msg.default, msg.err_arg
 
     if '-h' in sys.argv or '--help' in sys.argv:
-        print(_(msg.default))
+        print(msg.default)
 
     # parser.add_option("-f", "--file", dest="filename",
     #                  help="write report to FILE", metavar="FILE")
 
     _parser.add_option("-n", "--name",
-                      action="store", dest="name", default="last",
-                      help="The 'name', to save your command, default='last'")
-    #ToDo
+                       action="store", dest="name", default="last",
+                       help="The 'name', to save your command, default='last'")
+    _parser.add_option("-c", "--count",
+                       action="store", dest="count", default=1,
+                       help="Count for 'nodes ping', default=1")
+    _parser.add_option("-t", "--timeout",
+                       action="store", dest="timeout", default=30,
+                       help="Timeout for 'nodes ping', default=1")
     _parser.add_option("-v", "--verbose",
-                      action="store_true", dest="verbose", default=True,
-                      help="Print status messages to stdout")
+                       action="store_true", dest="verbose", default=True,
+                       help="Print status messages to stdout")
     _parser.add_option("-q", "--quiet",
-                      action="store_false", dest="verbose", default=False,
-                      help="Don't print status messages to stdout")
+                       action="store_false", dest="verbose", default=False,
+                       help="Don't print status messages to stdout")
+
 
     (options, args) = _parser.parse_args()
     logging.debug("options:{0}, args:{1}".format(options, args))
@@ -106,17 +110,14 @@ def main():
     else:
         _parser.print_help()
         help_info()
-        print(_(msg.err_arg))
-
-
-
+        print(msg.err_arg)
 
     """if debug:
         input("\nPress any key to exit ...")"""
 
 
 def choice(options, args):
-    #global msg.default, msg.err_arg, msg.err_cmd
+    # global msg.default, msg.err_arg, msg.err_cmd
 
     #save
     if str(args[0]).lower() == "save":
@@ -127,7 +128,7 @@ def choice(options, args):
             save.set_cmd(options.name, args[1])
         else:
             _parser.print_help()
-            _parser.error(_(msg.err_arg))
+            _parser.error(msg.err_arg)
 
     #run
     elif str(args[0]).lower() == "run":
@@ -139,7 +140,7 @@ def choice(options, args):
             save.run_cmd(args[1], options.verbose)
         else:
             _parser.print_help()
-            _parser.error(_(msg.err_arg))
+            _parser.error(msg.err_arg)
 
     #do
     elif str(args[0]).lower() == "do":
@@ -155,7 +156,7 @@ def choice(options, args):
         if cmd is not None:
             save.run_cmd(cmd, options.verbose)
         else:
-            _parser.error(_(msg.err_cmd +(": "+ args[1]) if (len(args) == 2) else ""))
+            _parser.error(msg.err_cmd + (": " + args[1]) if (len(args) == 2) else "")
 
     #list
     elif str(args[0]).lower() == "list":
@@ -164,11 +165,11 @@ def choice(options, args):
         save = alxlib.save.Save()
 
         if len(args) == 2:
-            save.list_cmd(args[1], _(msg.no_list))
+            save.list_cmd(args[1], msg.no_list)
         elif options.name.lower() != "last":
-            save.list_cmd(options.name, _(msg.no_list))
+            save.list_cmd(options.name, msg.no_list)
         else:
-            save.list_all(_(msg.no_list))
+            save.list_all(msg.no_list)
 
     #flush
     elif str(args[0]).lower() == "flush":
@@ -182,25 +183,35 @@ def choice(options, args):
             save.flush_cmd(options.name)
         else:
             save.flush_all()
-    #aws
+    #cloud
     elif str(args[0]).lower() == "keydir":
         if len(args) == 2:
             import alxlib.save, alxlib.data
+
             save = alxlib.save.Save()
             save.set_data(alxlib.data.key_dir, args[1])
         else:
             _parser.print_help()
-            _parser.error(_(msg.err_arg))
+            _parser.error(msg.err_arg)
+
+    elif str(args[0]).lower() == "nodes":
+        if len(args) == 2:
+            if str(args[1]).lower() == "ping":
+                import alxlib.cloud.aws
+                aws = alxlib.cloud.aws.AWS()
+                aws.ping(int(options.count), int(options.timeout))
+        else:
+            _parser.print_help()
+            _parser.error(msg.err_arg)
     else:
         _parser.print_help()
         help_info()
-        print(_(msg.err_na_arg))
-
+        print(msg.err_na_arg)
 
 
 if __name__ == "__main__":
     if sys.version_info[0] < 3:
-        print(_(msg.err_py))
+        print(msg.err_py)
         exit()
     else:
         main()

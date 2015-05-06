@@ -17,6 +17,15 @@ alx flush -n test2
 alx flush
 
 
-#AWS
+#
 # Key
 alx keydir /full/usr/dir/
+
+# alx-server
+python alx-server.py
+
+#Ping
+
+alx nodes ping
+alx nodes ping -c 2 -t 60
+
