@@ -8,7 +8,7 @@
 
 ## 0.3.*
 
-* multi langauge
+* multi language
 * -v
 * -q
 
@@ -17,12 +17,12 @@
 * pip installer
 * packaging
 * shell command
+* run
+* list
 
 ## 0.1.*
 
 * -n
-* save,
-* run
-* list
+* save
 * flush
 

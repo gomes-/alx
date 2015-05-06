@@ -13,11 +13,14 @@ $ alx keydir /path/to/file/dir
 
 alxkey_version = '0.2.0'
 
-alxkey_az = {
-    'AZ_STORAGE_ACCOUNT_NAME': 'your id here',
-    'AZ_ACCESS_KEY': 'your key here'
-
-}
+alxkey_azure = {
+    'AZURE_STORAGE_ACCOUNT_NAME': 'your account name here',
+    'AZURE_ACCESS_KEY': 'your key here',
+    'AZURE_CERT_PATH_PUB': '',
+    'AZURE_CERT_PATH_PRV': '',
+    'AZURE_POLL': '30',
+    'AZURE_INVISIBLE': '30',
+    }
 
 alxkey_aws = {
     'AWS_ACCESS_KEY_ID': 'your id here',

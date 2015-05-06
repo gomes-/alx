@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.1"
+_version = "0.4.2"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -197,8 +197,8 @@ def choice(options, args):
     elif str(args[0]).lower() == "nodes":
         if len(args) == 2:
             if str(args[1]).lower() == "ping":
-                import alxlib.cloud.aws
-                aws = alxlib.cloud.aws.AWS()
+                import alxlib.cloud.azure
+                aws = alxlib.cloud.azure.Azure()
                 aws.ping(int(options.count), int(options.timeout))
         else:
             _parser.print_help()

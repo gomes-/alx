@@ -8,8 +8,8 @@
 **  Copyright: All Rights Reserved. 2015
 """
 
-debug = True
-_version = "0.4.1"
+debug = False
+_version = "0.4.2"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -62,15 +62,15 @@ def check_key():
         return False
 
 def run():
-    import alxlib.cloud.aws
-    aws = alxlib.cloud.aws.AWS()
+    import alxlib.cloud.azure
+    azure = alxlib.cloud.azure.Azure()
 
-    if aws.connect_sqs()== None:
-        logging.critical("AWS connection failure, daemon will not run")
+    if azure.connect_sqs()== None:
+        logging.critical("Azure connection failure, daemon will not run")
         exit()
     else:
         logging.info("alx-server running ...")
-        aws.server_run()
+        azure.server_run()
 
 def run_linux():
     import daemon
