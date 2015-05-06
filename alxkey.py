@@ -11,7 +11,14 @@ $ alx keydir /path/to/file/dir
 5) Run alx-server.py
 """
 
-alxkey_version = '0.1.0'
+alxkey_version = '0.2.0'
+
+alxkey_az = {
+    'AZ_STORAGE_ACCOUNT_NAME': 'your id here',
+    'AZ_ACCESS_KEY': 'your key here'
+
+}
+
 alxkey_aws = {
     'AWS_ACCESS_KEY_ID': 'your id here',
     'AWS_SECRET_ACCESS_KEY': 'your key here',
@@ -21,4 +28,4 @@ alxkey_aws = {
     'AWS_INVISIBLE': '30',
     }
 
-alxkey_primary = 'aws'
+alxkey_primary = 'az'

@@ -4,6 +4,7 @@
 * nodes ping
 * alx-server
 * AWS
+* keydir
 
 ## 0.3.*
 
