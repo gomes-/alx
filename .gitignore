@@ -1,4 +1,3 @@
-test/test.py
-test/cmd.py
+test/misc
 alxlib/cloud/aws.py
 ToDo.txt

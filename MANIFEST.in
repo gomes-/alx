@@ -2,4 +2,4 @@ include CHEATSHEET.md
 include README.md
 include LICENSE
 recursive-include bin *
-recursive-exclude test *
+recursive-exclude test/misc *
