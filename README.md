@@ -26,9 +26,11 @@ $ alx arg1 [arg2] [options]
 
 $ alx-server [shell]
 
-## (optional) Setup & Run: alx-server
+# alx-server (optional)
+## Setup & Run
 
 Download & Edit https://github.com/gomes-/alx/blob/master/alxkey.py
+
 Run
 
 $ alx keydir /path/to/key/dir
@@ -50,9 +52,11 @@ $ alx-server
 
 * (required) https://github.com/gomes-/alx/blob/master/alxkey.py
 
-#### For Linux
+* Linux
 
-* (required) sudo
+* * (required) sudo
+
+
 
 
 
