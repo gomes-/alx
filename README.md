@@ -8,15 +8,15 @@ Check out cheat sheet https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
 
 ## Install
 
-#### Linux
+##### Linux
 
 $ sudo pip3 install alx
 
-#### Windows
+##### Windows
 
 $ pip install alx
 
-#### Developer
+##### Developer
 
 $ git clone git://github.com/gomes-/alx.git
 
@@ -43,11 +43,11 @@ $ alx-server
 
 * (required) Python3
  
-#### For Windows
+##### For Windows
 
 * (optional) Unix Tools for Windows
  
-### alx-server, cloud features
+##### alx-server, cloud features
 
 * (required) Azure:storage
 
