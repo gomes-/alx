@@ -8,23 +8,28 @@ Check out cheat sheet https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
 
 ## Install
 
+Make sure path to your environment variable is set to alx, alx-server directory 
+
 ##### Linux
 
-$ sudo pip3 install alx
+
+    $ sudo pip3 install alx
 
 ##### Windows
 
-$ pip install alx
+
+    $ pip install alx
 
 ##### Developer
 
-$ git clone git://github.com/gomes-/alx.git
+
+    $ git clone git://github.com/gomes-/alx.git
 
 ## Run
 
-$ alx arg1 [arg2] [options]
-
-$ alx-server [shell]
+    $ alx arg1 [arg2] [options]
+    
+    $ alx-server [shell]
 
 # alx-server (optional)
 
@@ -34,10 +39,10 @@ Download & Edit https://github.com/gomes-/alx/blob/master/alxkey.py
 
 Run
 
-$ alx keydir /path/to/key/dir
-
-$ alx-server
-
+    $ alx keydir /path/to/key/dir
+    
+    $ alx-server
+    
 
 ## Dependencies
 
