@@ -1,7 +1,7 @@
 #Release Notes
 
 ## 0.4.*
-* nodes ping
+* node ping
 * alx-server
 * AWS
 * keydir

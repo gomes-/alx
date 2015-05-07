@@ -17,7 +17,7 @@ alx flush -n test2
 alx flush
 
 
-#
+#Cloud
 # Key
 alx keydir /full/usr/dir/
 
@@ -26,6 +26,6 @@ python alx-server.py
 
 #Ping
 
-alx nodes ping
-alx nodes ping -c 2 -t 60
+alx-server node ping
+alx-sever node ping -c 2 -t 60
 

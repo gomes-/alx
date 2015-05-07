@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.2"
+_version = "0.4.3"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -194,7 +194,7 @@ def choice(options, args):
             _parser.print_help()
             _parser.error(msg.err_arg)
 
-    elif str(args[0]).lower() == "nodes":
+    elif str(args[0]).lower() == "node":
         if len(args) == 2:
             if str(args[1]).lower() == "ping":
                 import alxlib.cloud.azure

@@ -8,8 +8,8 @@
 **  Copyright: All Rights Reserved. 2015
 """
 
-debug = False
-_version = "0.4.2"
+debug = True
+_version = "0.4.3"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -27,13 +27,12 @@ $ alx keydir /path/to/file/dir
 
 
 
-
 # To kick off the script, run the following from the python directory:
 # PYTHONPATH=`pwd` python testdaemon.py start
 
-#standard python libs
+# standard python libs
 import logging, time
-import os, sys
+import os, sys, platform
 from gettext import gettext as _
 
 path_file = os.path.abspath(__file__)
@@ -61,64 +60,87 @@ def check_key():
         print(_msg_help)
         return False
 
+
 def run():
     import alxlib.cloud.azure
+
     azure = alxlib.cloud.azure.Azure()
 
-    if azure.connect_sqs()== None:
+    if azure.connect_sqs() == None:
         logging.critical("Azure connection failure, daemon will not run")
         exit()
     else:
         logging.info("alx-server running ...")
         azure.server_run()
 
-def run_linux():
-    import daemon
-    from daemon import runner
 
-    with daemon.DaemonContext():
-        run()
+def run_linux(app):
+    try:
+        #app.run()
+
+        import daemon
+        from daemon import runner
+
+        #Solution 1
+        #with daemon.DaemonContext():
+        #    run()
+
+        #Solution 2
+        #working_directory='/opt/lib/alx-server'
+        context = daemon.DaemonContext(
+            working_directory='/tmp',
+            umask=0o002,
+            pidfile=daemon.pidfile.PIDLockFile('/var/run/alx-server.pid')
+            )
+
+        with context:
+            app.run()
+
+        #Solution 3
+        """
+        logger = logging.getLogger("alx-server-log")
+        logger.setLevel(logging.INFO)
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        handler = logging.FileHandler("/var/log/alx-server.log")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)"""
+
+        """daemon_runner = runner.DaemonRunner(app)
+        #This ensures that the logger file handle does not get closed during daemonization
+        #daemon_runner.daemon_context.files_preserve = [handler.stream]
+        daemon_runner.do_action()
+        #"""
+    except Exception as e:
+        logging.critical("Error daemon: {0}".format(e))
+
+
+class App():
+    def __init__(self, func):
+        self.stdin_path = '/dev/null'
+        self.stdout_path = '/dev/null'
+        self.stderr_path = '/dev/null'
+        #self.pidfile_path = '/tmp/alx-server.pid'
+        self.pidfile_path = '/var/run/alx-server.pid'
+        self.pidfile_timeout = 5
+        self.func = func
+
+    def run(self):
+        self.func()
 
 
 if check_key():
-    import platform
-    if platform.system().lower()=="windows":
-        run()
-    else:
-        run_linux()
+    try:
+        import platform
 
+        if platform.system().lower() == "windows":
+            run()
+        elif len(sys.argv)>0 and sys.argv[0].lower()=='shell':
+            run()
+        else:
+            print("#To run in shell")
+            print("usage: alx-server shell")
+            logging.info("alx-server: Running daemon for linux..")
+            run_linux(App(run))
+    except Exception as e:
+        logging.critical("Error running: {0}".format(e))
 
-
-"""
-class App():
-    def __init__(self):
-        self.stdin_path = '/dev/null'
-        self.stdout_path = '/dev/tty'
-        self.stderr_path = '/dev/tty'
-        self.pidfile_path = '/var/run/alx-daemon.pid'
-        self.pidfile_timeout = 5
-
-    def run(self):
-        while True:
-            #Main code goes here ...
-            #Note that logger level needs to be set to logging.DEBUG before this shows up in the logs
-            logger.debug("Debug message")
-            logger.info("Info message")
-            logger.warn("Warning message")
-            logger.error("Error message")
-            time.sleep(10)
-
-
-app = App()
-logger = logging.getLogger("alx-daemon-log")
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-handler = logging.FileHandler("/var/log/alx-daemon.log")
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-
-daemon_runner = runner.DaemonRunner(app)
-#This ensures that the logger file handle does not get closed during daemonization
-daemon_runner.daemon_context.files_preserve = [handler.stream]
-daemon_runner.do_action()
-"""

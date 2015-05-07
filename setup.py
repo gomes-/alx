@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.4.0',
+    version='0.4.2',
     url='https://github.com/gomes-/alx',
     license='GPLv3+',
     author='Alex Gomes',
@@ -13,16 +13,18 @@ setup(
              'bin/alx.bat',
              'bin/alx',
              'bin/alx-server.py',
+             'bin/alx-server.bat',
+             'bin/alx-server',
              ],
     packages=['alxlib',
               'alxlib.cloud',
-              'alxlib.daemon',
               'alxlib.data',
               'alxlib.help',
               ],
     install_requires = ['python-daemon>=2.0.0',
                         'boto>=2.35.0',
-                        'requests>=2.7.0'
+                        'azure>=0.10.2',
+                        'requests>=2.7.0',
                         ],
 
     classifiers=[
@@ -31,7 +33,7 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'Intended Audience :: Information Technology',
         'Intended Audience :: System Administrators',
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'License :: Other/Proprietary License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',

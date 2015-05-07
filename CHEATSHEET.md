@@ -50,4 +50,4 @@ $ alx flush
 # Cloud
 #### Set keydir to alxkey.py
 #### download https://github.com/gomes-/alx/blob/master/alexkey.py
-$ alx keydir /path/to/file/
+$ alx keydir /path/to/file/dir
