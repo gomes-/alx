@@ -85,13 +85,20 @@ class Azure():
     def msg_send(self, dict):
         try:
             self.connect_sqs()
-            j= json.dumps(dict, ensure_ascii=False)
-            body=base64.b64encode(j.encode()).decode()
+            body=self.msg_encode(dict)
             self.q.put_message(self.q_name, body, messagettl=self.msg_ttl)
             #print(encode.decode())
 
         except Exception as e:
             logging.critical(_("Message creation failure: msg_send()"))
+
+    def msg_encode(self, dict):
+        try:
+            j= json.dumps(dict, ensure_ascii=False)
+            body=base64.b64encode(j.encode()).decode()
+            return body
+        except Exception as e:
+            logging.critical(_("Message creation failure: msg_encode()"))
 
     def msg_decode(self, body):
         try:

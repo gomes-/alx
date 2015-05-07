@@ -24,5 +24,12 @@ class MyTestCase(unittest.TestCase):
         result = az.connect_sqs()
         self.assertIsNotNone(result)
 
+
+    def test_base64(self):
+        az=Azure()
+        dict={"test":"test", "test2":"blah"}
+        result = az.msg_decode(az.msg_encode(dict))
+        self.assertDictEqual(result, dict)
+
 if __name__ == '__main__':
     unittest.main()

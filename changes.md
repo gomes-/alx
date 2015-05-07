@@ -1,8 +1,11 @@
 #Release Notes
 
 ## 0.4.*
+
+* examples
 * node ping
 * alx-server
+* Azure
 * AWS
 * keydir
 
@@ -14,15 +17,17 @@
 
 ## 0.2.*
 
+* bug fixes
 * pip installer
 * packaging
-* shell command
-* run
+* shell script
 * list
+* flush
 
 ## 0.1.*
 
+* run
+* do
 * -n
 * save
-* flush
 
