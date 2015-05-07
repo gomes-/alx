@@ -2,8 +2,6 @@
 
 Swiss army knife for Shell, Cloud and DevOps in Python.
 
-Common commands to run in your shell
-
 ## How To
 
 Check out cheat sheet https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
@@ -26,12 +24,35 @@ $ git clone git://github.com/gomes-/alx.git
 
 $ alx arg1 [arg2] [options]
 
+$ alx-server [shell]
+
+## (optional) Setup & Run: alx-server
+
+Download & Edit https://github.com/gomes-/alx/blob/master/alxkey.py
+Run
+
+$ alx keydir /path/to/key/dir
+
+$ alx-server
+
 
 ## Dependencies
 
-* (required) Python3 
-
+* (required) Python3
+ 
 #### For Windows
 
 * (optional) Unix Tools for Windows
+ 
+### alx-server, cloud features
+
+* (required) Azure:storage
+
+* (required) https://github.com/gomes-/alx/blob/master/alxkey.py
+
+#### For Linux
+
+* (required) sudo
+
+
 

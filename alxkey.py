@@ -8,7 +8,7 @@ Key not set
 
 $ alx keydir /path/to/file/dir
 
-5) Run alx-server.py
+5) Run alx-server
 """
 
 alxkey_version = '0.2.0'

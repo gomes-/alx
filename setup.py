@@ -2,9 +2,9 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.4.2',
+    version='0.4.4',
     url='https://github.com/gomes-/alx',
-    license='GPLv3+',
+    license='Proprietary',
     author='Alex Gomes',
     author_email='gomes@alexgomes.com',
     description='Swiss army knife for Shell, Cloud and DevOps.',
@@ -22,7 +22,6 @@ setup(
               'alxlib.help',
               ],
     install_requires = ['python-daemon>=2.0.0',
-                        'boto>=2.35.0',
                         'azure>=0.10.2',
                         'requests>=2.7.0',
                         ],
