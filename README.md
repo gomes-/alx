@@ -53,7 +53,7 @@ $ alx-server
 
 * (required) https://github.com/gomes-/alx/blob/master/alxkey.py
 
-##### Linux
+###### Linux
 
 * (required) sudo
 
