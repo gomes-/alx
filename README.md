@@ -27,6 +27,7 @@ $ alx arg1 [arg2] [options]
 $ alx-server [shell]
 
 # alx-server (optional)
+
 ## Setup & Run
 
 Download & Edit https://github.com/gomes-/alx/blob/master/alxkey.py
