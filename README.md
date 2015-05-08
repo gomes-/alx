@@ -9,6 +9,17 @@ Check out
 * [Cheatsheet](https://github.com/gomes-/alx/blob/master/CHEATSHEET.md)
 * [Simple Example](https://github.com/gomes-/alx/blob/master/examples/simple.md)
 
+##Features
+
+* Save command
+* Replay command
+* Get information about any nodes running alx-server
+
+#
+	$ alx node list
+
+
+![](https://raw.githubusercontent.com/gomes-/alx/master/examples/alx-server-node-list.png)
 
 ## Install
 
