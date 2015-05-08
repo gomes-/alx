@@ -20,10 +20,14 @@ setup(
               'alxlib.cloud',
               'alxlib.data',
               'alxlib.help',
+              'alxlib.node',
+
               ],
     install_requires = ['python-daemon>=2.0.0',
                         'azure>=0.10.2',
                         'requests>=2.7.0',
+                        'terminaltables>=1.1.1',
+                        'colorclass>=1.2.0',
                         ],
 
     classifiers=[

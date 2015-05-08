@@ -194,12 +194,18 @@ def choice(options, args):
             _parser.print_help()
             _parser.error(msg.err_arg)
 
-    elif str(args[0]).lower() == "node":
+    elif str(args[0]).lower() == "node" or str(args[0]).lower() == "nodes":
         if len(args) == 2:
-            if str(args[1]).lower() == "ping":
-                import alxlib.cloud.azure
-                aws = alxlib.cloud.azure.Azure()
-                aws.ping(int(options.count), int(options.timeout))
+            if False:
+                pass
+            elif str(args[1]).lower() == "list" or str(args[1]).lower() == "ls":
+                from alxlib.cloud.azure import Azure
+                azure= Azure()
+                azure.print_list()
+            else:
+                #ToDo node help
+                _parser.print_help()
+                _parser.error(msg.err_arg)
         else:
             _parser.print_help()
             _parser.error(msg.err_arg)

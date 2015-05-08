@@ -8,8 +8,8 @@
 **  Copyright: All Rights Reserved. 2015
 """
 
-debug = True
-_version = "0.4.3"
+debug = False
+_version = "0.4.4"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
