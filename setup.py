@@ -23,12 +23,12 @@ setup(
               'alxlib.node',
 
               ],
-    install_requires = ['python-daemon>=2.0.0',
-                        'azure>=0.10.2',
-                        'requests>=2.7.0',
-                        'terminaltables>=1.1.1',
-                        'colorclass>=1.2.0',
-                        ],
+    install_requires=['python-daemon>=2.0.5',
+                      'azure>=0.10.2',
+                      'requests>=2.7.0',
+                      'terminaltables>=1.1.1',
+                      'colorclass>=1.2.0',
+                      ],
 
     classifiers=[
         'Environment :: Console',
@@ -49,5 +49,5 @@ setup(
         'Topic :: System :: Networking ',
         'Topic :: System :: Shells',
         'Topic :: System :: Systems Administration',
-        ],
+    ],
 )
