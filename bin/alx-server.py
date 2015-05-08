@@ -138,7 +138,7 @@ if check_key():
         elif len(sys.argv)>1 and sys.argv[1].lower()=='shell':
             run()
         else:
-            print("#To run in shell")
+            #print("#To run in shell")
             #print("usage: alx-server shell")
             logging.info("alx-server: Running daemon for linux..")
             run_linux(App(run))
