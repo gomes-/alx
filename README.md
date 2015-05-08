@@ -58,7 +58,7 @@ Run
 
 ## Dependencies
 
-* (required) Azure:storage
+* (required) Azure: storage account
 
 * (required) https://github.com/gomes-/alx/blob/master/alxkey.py
 

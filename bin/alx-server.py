@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.4"
+_version = "0.4.5"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -26,11 +26,6 @@ $ alx keydir /path/to/file/dir
 """
 
 
-
-# To kick off the script, run the following from the python directory:
-# PYTHONPATH=`pwd` python testdaemon.py start
-
-# standard python libs
 import logging, time
 import os, sys, platform
 from gettext import gettext as _
@@ -45,12 +40,16 @@ if os.path.isdir(dir_alxlib):
 
 import alxlib.key
 
+for arg in sys.argv:
+    if arg.lower()=='=d':
+        debug=True
 
 if debug:
     logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 else:
     logging.basicConfig(level=logging.INFO, format=' %(asctime)s - %(levelname)s - %(message)s')
 
+logging.info("alx-server version {0}".format(_version))
 
 def check_key():
     key = alxlib.key.Key()
@@ -132,13 +131,15 @@ if check_key():
     try:
         import platform
 
+        logging.debug("arg {0}".format(sys.argv))
+
         if platform.system().lower() == "windows":
             run()
-        elif len(sys.argv)>0 and sys.argv[0].lower()=='shell':
+        elif len(sys.argv)>1 and sys.argv[1].lower()=='shell':
             run()
         else:
             print("#To run in shell")
-            print("usage: alx-server shell")
+            #print("usage: alx-server shell")
             logging.info("alx-server: Running daemon for linux..")
             run_linux(App(run))
     except Exception as e:

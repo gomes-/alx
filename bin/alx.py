@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.4"
+_version = "0.4.5"
 __author__ = 'Alex Gomes'
 
 _msg_help = """

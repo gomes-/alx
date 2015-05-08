@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.4.4',
+    version='0.4.5',
     url='https://github.com/gomes-/alx',
     license='Proprietary',
     author='Alex Gomes',

@@ -1,5 +1,6 @@
 # CheatSheet
 ----------------------------------------
+#alx
 ## save
 ##### Command with name
     $ alx save 'ssh -i azure.pem ubuntu@ubuntu.cloudapp.net' -n connect1   
@@ -49,9 +50,22 @@
 
     $ alx flush
 
-# Cloud
+# alx-server (Cloud)
+## setup
 #### Set keydir to alxkey.py
 
-    download https://github.com/gomes-/alx/blob/master/alexkey.py
+    #download, edit, save https://github.com/gomes-/alx/blob/master/alexkey.py
     
     $ alx keydir /path/to/file/dir
+
+#### Start server
+
+	$ sudo alx-server
+
+#### Stop server
+    $ ps -aux |grep alx-server
+	$ sudo kill -9 PID
+
+## nodes
+    $ alx nodes list
+    $ alx node ls
