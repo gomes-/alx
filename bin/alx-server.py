@@ -15,7 +15,7 @@ __author__ = 'Alex Gomes'
 _msg_help = """
 Key not set
 
-1) Download key file at https://github.com/gomes-/alx/blob/master/alexkey.py
+1) Download key file at https://raw.githubusercontent.com/gomes-/alx/master/alxkey.py
 2) Edit the file and put your keys (don't add extra space)
 3) Store in a safe place
 4) Run the command

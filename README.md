@@ -59,7 +59,7 @@ Make sure path to your environment variable is set to alx, alx-server directory
 
 ## Setup & Run
 
-Download & Edit https://github.com/gomes-/alx/blob/master/alxkey.py
+Download & Edit https://raw.githubusercontent.com/gomes-/alx/master/alxkey.py
 
 Run
 
@@ -71,7 +71,7 @@ Run
 
 * (required) Azure: storage account
 
-* (required) https://github.com/gomes-/alx/blob/master/alxkey.py
+* (required) https://raw.githubusercontent.com/gomes-/alx/master/alxkey.py
 
 ##### Linux
 
