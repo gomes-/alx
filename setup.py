@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='alx',
-    version='0.4.5',
+    version='0.5.0',
     url='https://github.com/gomes-/alx',
     license='Proprietary',
     author='Alex Gomes',
@@ -21,6 +21,7 @@ setup(
               'alxlib.data',
               'alxlib.help',
               'alxlib.node',
+              'alxlib.sync',
 
               ],
     install_requires=['python-daemon>=2.0.5',

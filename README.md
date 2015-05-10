@@ -11,9 +11,15 @@ Check out
 
 ##Features
 
-* Save command
-* Replay command
-* Get information about any nodes running alx-server
+* alx
+ * Save command
+ * Replay command
+ * (beta) Sync local files
+* alx-server
+ * Get information about nodes running alx-server
+* Software
+ * Platform independent
+ * OOP
 
 #
 	$ alx node list

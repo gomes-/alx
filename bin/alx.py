@@ -9,7 +9,7 @@
 """
 
 debug = False
-_version = "0.4.5"
+_version = "0.5.0"
 __author__ = 'Alex Gomes'
 
 _msg_help = """
@@ -38,7 +38,7 @@ Examples:
    more at https://github.com/gomes-/alx/blob/master/CHEATSHEET.md
 """
 
-import sys, os, time
+import sys, os
 import logging
 from optparse import OptionParser
 from gettext import gettext as _
@@ -62,6 +62,9 @@ else:
 
 _parser = OptionParser("usage: alx <{save|run|do|list|flush}> [arg2] [options]", version=_version)
 
+from colorclass import Color, Windows
+
+Windows.enable(auto_colors=True, reset_atexit=True)  # Does nothing if not on Windows.
 
 def help_info():
     """ Prints Help
@@ -88,21 +91,28 @@ def main():
     _parser.add_option("-n", "--name",
                        action="store", dest="name", default="last",
                        help="The 'name', to save your command, default='last'")
-    _parser.add_option("-c", "--count",
+    """"_parser.add_option("-c", "--count",
                        action="store", dest="count", default=1,
                        help="Count for 'nodes ping', default=1")
     _parser.add_option("-t", "--timeout",
                        action="store", dest="timeout", default=30,
-                       help="Timeout for 'nodes ping', default=1")
+                       help="Timeout for 'nodes ping', default=1")"""
     _parser.add_option("-v", "--verbose",
                        action="store_true", dest="verbose", default=True,
                        help="Print status messages to stdout")
     _parser.add_option("-q", "--quiet",
-                       action="store_false", dest="verbose", default=False,
+                       action="store_false", dest="verbose",
                        help="Don't print status messages to stdout")
+    """_parser.add_option("-d",
+                       action="store_true", dest="debug", default=False)"""
 
 
     (options, args) = _parser.parse_args()
+
+    """
+    if options.debug:
+        logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')"""
+
     logging.debug("options:{0}, args:{1}".format(options, args))
 
     if len(args) > 0:
@@ -111,6 +121,8 @@ def main():
         _parser.print_help()
         help_info()
         print(msg.err_arg)
+
+
 
     """if debug:
         input("\nPress any key to exit ...")"""
@@ -209,6 +221,27 @@ def choice(options, args):
         else:
             _parser.print_help()
             _parser.error(msg.err_arg)
+    elif str(args[0]).lower() == "sync":
+        if len(args) == 4:
+            from alxlib.sync import Sync
+            sync= Sync()
+
+            if (args[1]).lower() == "merge":
+                sync.sync_merge(args[2], args[3], options.verbose)
+            elif (args[1]).lower() == "mirror":
+                sync.sync_mirror(args[2], args[3], options.verbose)
+            elif (args[1]).lower() == "update":
+                sync.sync_update(args[2], args[3], options.verbose)
+            elif (args[1]).lower() == "compare":
+                sync.sync_compare(args[2], args[3], options.verbose)
+
+
+        else:
+            _parser.print_help()
+            _parser.error(msg.err_arg)
+
+
+
     else:
         _parser.print_help()
         help_info()

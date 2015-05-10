@@ -357,12 +357,15 @@ class Azure():
                            ]
                           ]
 
+            max_wrap=10
+
             for row in rows:
                 #d = self.entity2dict(row)
                 d = row.__dict__
                 time = alxlib.time_help.format_from_timestamp(d['Timestamp'])
-                li = [d['hostname'], time, d['ip'], d['os'], d['osrelease'], d['osversion'], d["system"],
-                      self.wrap_text(d["processor"], 10), ]
+                li = [d['hostname'], time, d['ip'], d['os'], d['osrelease'],
+                      self.wrap_text(d['osversion'], max_wrap), d["system"],
+                      self.wrap_text(d["processor"], max_wrap), ]
                 table_data.append(li)
 
             table = AsciiTable(table_data)

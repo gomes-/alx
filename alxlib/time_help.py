@@ -2,7 +2,7 @@ __author__ = 'Alex Gomes'
 
 import datetime, time
 
-format_desc_human='%Y-%m-%d %H:%M:%S'
+format_desc_human='%Y-%m-%d/n%H:%M:%S'
 
 def datetime_from_utc_to_local(utc_datetime):
     now_timestamp = time.time()

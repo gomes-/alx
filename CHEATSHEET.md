@@ -49,12 +49,25 @@
 ##### Remove all command
 
     $ alx flush
+    
 
+## sync
+##### Show Difference
+    $ alx sync compare ~/tmp1 ~/tmp2/
+##### Update all new files/directories to destination
+    $ alx sync update ~/tmp1 ~/tmp2/
+##### Synchronize source and destination
+    $ alx sync merge ~/tmp1 ~/tmp2/
+##### Make destination exact copy of source. Will DELETE files/directories in destination
+    $ alx sync mirror ~/tmp1 ~/tmp2/
+##### Don't show table
+    $ alx sync update -q ~/tmp1 ~/tmp2/
+    
 # alx-server (Cloud)
 ## setup
 #### Set keydir to alxkey.py
 
-    #download, edit, save https://github.com/gomes-/alx/blob/master/alexkey.py
+    #download, edit, save https://raw.githubusercontent.com/gomes-/alx/master/alxkey.py
     
     $ alx keydir /path/to/file/dir
 

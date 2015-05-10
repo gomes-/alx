@@ -1,5 +1,9 @@
 #Release Notes
 
+## 0.5.*
+
+* Sync local
+
 ## 0.4.*
 
 * examples
