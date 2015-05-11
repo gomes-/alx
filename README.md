@@ -14,7 +14,7 @@ Check out
 * alx
  * Save command
  * Replay command
- * (beta) Sync local files
+ * (beta) Sync local files, sync with Microsoft Azure
 * alx-server
  * Get information about nodes running alx-server
 * Software

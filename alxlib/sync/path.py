@@ -12,6 +12,7 @@ class SyncPath():
         self.ModifiedTS=""
         self.MD5=""
         self.Size=0
+        self.sys=""
 
     def __str__(self):
         return "IsDir: {0}, IsFile:{1}, AbsPath:{2}, SPath:{3}"\

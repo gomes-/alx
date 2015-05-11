@@ -35,6 +35,8 @@ class Sync(object):
             return "s3"
         elif self.ssh_host_check(path):
             return "ssh"
+        elif path.startswith("az://"):
+            return "azure"
         else:
             return "local"
 
@@ -110,17 +112,38 @@ class Sync(object):
 
             if src_type == "local":
                 sys_src = alxlib.sync.sys.SLocal()
+            elif src_type == "azure":
+                sys_src = alxlib.sync.sys.SAzure()
 
             if dst_type == "local":
                 sys_dst = alxlib.sync.sys.SLocal()
+            elif dst_type == "azure":
+                sys_dst = alxlib.sync.sys.SAzure()
+                conn=sys_dst.connect_blob()
+                if conn is None:
+                    account_name=input("AZURE_STORAGE_ACCOUNT_NAME:")
+                    account_key=input("AZURE_ACCESS_KEY:")
+                    conn=sys_dst.connect_blob(az_account_name=account_name, az_account_key=account_key)
+                    if conn is None:
+                        print(_("Cannot connect to Azure"))
+                        exit(1)
+
+
+
 
             self.src_path = sys_src.path_clean(src)
             self.src_list = sys_src.path_list(self.src_path)
 
+
             self.dst_path = sys_dst.path_clean(dst)
             self.dst_list = sys_dst.path_list(self.dst_path)
 
+            #print(self.dst_path)
+            #exit(1)
+
             # print(self.src_list)
+
+
 
             a, b = self.path_reduce(self.src_list.copy(), self.dst_list.copy())
 
@@ -135,29 +158,34 @@ class Sync(object):
                 for key, value in tmp.items():
                     item = self.src_list.get(key, None)
                     if item != None:
-                        a[key] = item
+                        #a[key] = item
                         del b[key]
-                if verbose:
-                    self.print_compare(src, dst, a, b, ["act", "==>", "del"])
-                print(_("{0} files/directories will be updated ==>".format(len(a))))
-                print(_("{0} files/directories will be deleted (del)".format(len(b))))
-                choice = input(_("Proceed? [y] Yes  [a] Yes to All  [n] No:")).lower()
-                if choice.lower() != "n":
-                    for key, value in b.items():
-                        if choice.lower() != 'a':
-                            if input("{0} (del)(y/n):".format(value.AbsPath)).lower() == "y":
-                                sys_src.remove(value, dst_type)
-                        else:
-                            sys_src.remove(value, dst_type)
-                    for key, value in a.items():
-                        if choice.lower() != 'a':
-                            if input("{0} ==>(y/n):".format(value.AbsPath)).lower() == "y":
-                                sys_src.copy(value, self.dst_path, src_type, dst_type)
-                        else:
-                            sys_src.copy(value, self.dst_path, src_type, dst_type)
+                n = len(a) + len(b)
+                if n > 0:
+                    if verbose:
+                        self.print_compare(src, dst, a, b, ["act", "==>", "del"])
+                    print(_("{0} files/directories will be updated ==>".format(len(a))))
+                    print(_("{0} files/directories will be deleted (del)".format(len(b))))
+                    choice = input(_("Proceed? [y] Yes  [a] Yes to All  [n] No:")).lower()
+                    if choice.lower() != "n":
+                        for key, value in b.items():
+                            if choice.lower() != 'a':
+                                if input("{0} (del)(y/n):".format(value.AbsPath)).lower() == "y":
+                                    sys_dst.remove(value)
+                            else:
+                                sys_dst.remove(value)
+                        for key, value in a.items():
+                            if choice.lower() != 'a':
+                                if input("{0} ==>(y/n):".format(value.AbsPath)).lower() == "y":
+                                    sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
+                            else:
+                                sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
+                else:
+                    print(_("Destination is already mirrored"))
 
 
-                            #delete b
+
+                                #delete b
             elif option == "merge":
                 if verbose:
                     self.print_compare(src, dst, a, b, ["act", "==>", "<=="])
@@ -169,29 +197,29 @@ class Sync(object):
                         for key, value in a.items():
                             if choice.lower() != 'a':
                                 if input("{0} ==>(y/n):".format(value.AbsPath)).lower() == "y":
-                                    sys_src.copy(value, self.dst_path, src_type, dst_type)
+                                    sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
                             else:
-                                sys_src.copy(value, self.dst_path, src_type, dst_type)
+                                sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
                         for key, value in b.items():
                             if choice.lower() != 'a':
                                 if input("{0} <==(y/n):".format(value.AbsPath)).lower() == "y":
-                                    sys_src.copy(value, self.src_path, dst_type, src_type)
+                                    sys_src.copy(value, self.src_path, dst_type, src_type, sys_dst, sys_src)
                             else:
-                                sys_src.copy(value, self.src_path, dst_type, src_type)
+                                sys_src.copy(value, self.src_path, dst_type, src_type, sys_dst, sys_src)
             elif option == "update":
-                if verbose:
-                    self.print_compare(src, dst, a, b, ["act", "==>", "no"])
                 n = len(a)
                 if n > 0:
-                    print(_("{0} files/directories will be updated ==>".format(n)))
-                    choice = input(_("Proceed? [y] Yes  [a] Yes to All  [n] No:")).lower()
-                    if choice.lower() != "n":
-                        for key, value in a.items():
-                            if choice.lower() != 'a':
-                                if input("{0} ==>(y/n):".format(value.AbsPath)).lower() == "y":
-                                    sys_src.copy(value, self.dst_path, src_type, dst_type)
-                            else:
-                                sys_src.copy(value, self.dst_path, src_type, dst_type)
+                    if verbose:
+                        self.print_compare(src, dst, a, b, ["act", "==>", "no"])
+                        print(_("{0} files/directories will be updated ==>".format(n)))
+                        choice = input(_("Proceed? [y] Yes  [a] Yes to All  [n] No:")).lower()
+                        if choice.lower() != "n":
+                            for key, value in a.items():
+                                if choice.lower() != 'a':
+                                    if input("{0} ==>(y/n):".format(value.AbsPath)).lower() == "y":
+                                        sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
+                                else:
+                                    sys_src.copy(value, self.dst_path, src_type, dst_type, sys_src, sys_dst)
                 else:
                     print(_("Destination is already up to date"))
 
@@ -208,6 +236,7 @@ class Sync(object):
 
         except Exception as e:
             logging.debug("sync_main {0}".format(e))
+            print("Error")
             raise ()
 
 

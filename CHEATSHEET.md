@@ -54,6 +54,8 @@
 ## sync
 ##### Show Difference
     $ alx sync compare ~/tmp1 ~/tmp2/
+##### Azure
+    $ alx sync compare /tmp1 az://tmp1
 ##### Update all new files/directories to destination
     $ alx sync update ~/tmp1 ~/tmp2/
 ##### Synchronize source and destination
